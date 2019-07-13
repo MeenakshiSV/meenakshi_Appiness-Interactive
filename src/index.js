@@ -14,18 +14,12 @@ if (process.env.NODE_ENV == 'production') {
 
 
 function connected() {
-    // logger.info(`Server connected`, `SERVER CONNECTION`)
     console.log('Server connected')
     mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true }).then((res) => {
         console.log('Database connected')
-        // logger.info(`Database connected`, 'DB CONNECTION')
-        // setupController.createSuperAdmin()
     }).catch(error => {
         console.log('Database not conneted')
-        // logger.error(`Database not conneted`, 'DB ERROR')
-        // logger.error(error)
     })
-    // mongoose.set('useCreateIndex', true)
 }
 
 // app.listen(3000, ()=> {

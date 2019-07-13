@@ -1,20 +1,20 @@
 import express from 'express'
 import paramValidators from '../../middlewares/param-validators'
-import params from './products.params'
-import productsCtrl from './products.controller'
+import params from './users.params'
+import usersCtrl from './users.controller'
 
-class productRoute {
+class usersRoute {
     constructor() {
         this.router = express.Router()
         this.routes()
     } 
     routes() {
-        this.router.post('/add', paramValidators(params.add), this.add)
-        this.router.get('/list-category-wise', this.productListCategoryWise)
+        this.router.post('/register', paramValidators(params.register), this.register)
+        this.router.get('/list', this.list)
     }
-    add(req, res) {
+    register(req, res) {
         console.log(req.body)
-        productsCtrl.add(req.body).then(result => {
+        usersCtrl.register(req.body).then(result => {
             res.status(result.status).json(result)
             res.end()
         }).catch(error => {
@@ -23,18 +23,17 @@ class productRoute {
             res.end()
         })
     }
-
-    productListCategoryWise(req, res) {
-        productsCtrl.productListCategoryWise(req.query).then(result => {
+    list(req, res) {
+        console.log(req.query)
+        usersCtrl.list(req.query).then(result => {
             res.status(result.status).json(result)
             res.end()
         }).catch(error => {
             console.log(error)
             res.status(error.status).json(error)
             res.end()
-        }) 
+        })
     }
-
 }
 
-export default new productRoute().router
+export default new usersRoute().router

@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 
 import categoriesRouter from './services/categories/categories.route'
 import productsRouter from './services/products/products.route'
+import usersRouter from './services/users/users.route'
 
 class server {
     constructor() {
@@ -23,6 +24,7 @@ class server {
 
         router.use('/categories',  categoriesRouter)
         router.use('/products', productsRouter)
+        router.use('/users', usersRouter)
 
         this.app.use('/api', router)
     }

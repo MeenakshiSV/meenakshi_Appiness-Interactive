@@ -48,36 +48,6 @@ class productsCtrl {
         })
     }
 
-    list(body) {
-        return new Promise((resolve, reject) => {
-            productModel.find({}, (err, results) => {
-                if (err) {
-                    console.log(err)
-                    reject(commonError.internal_server)
-                } else {
-                    if (results) {
-                        resolve({
-                            status: status.success,
-                            message: `Product list`,
-                            body: {
-                                products: results
-                            }
-                        })
-
-                    } else {
-                        reject({
-                            status: status.not_found,
-                            message: `You have not added product list`,
-                            context: {
-                                key: 'not_found'
-                            }
-                        })
-                    }
-                }
-            })
-        })
-    }
-
     productListCategoryWise(body) {
         return new Promise((resolve, reject) => {
             let aggregate = categoryModel.aggregate()
@@ -123,25 +93,29 @@ class productsCtrl {
         })
     }
 
-    remove(body) {
+ 
+    list(body) {
         return new Promise((resolve, reject) => {
-            // console.log(body.business_id)
-            productModel.findByIdAndRemove(body.product_id, (err, result) => {
+            productModel.find({}, (err, results) => {
                 if (err) {
+                    console.log(err)
                     reject(commonError.internal_server)
                 } else {
-                    if (result) {
+                    if (results) {
                         resolve({
                             status: status.success,
-                            message: `Product deleted succesfully`,
-                            body: {}
+                            message: `Product list`,
+                            body: {
+                                products: results
+                            }
                         })
+
                     } else {
                         reject({
                             status: status.not_found,
-                            message: `Product does not exist!`,
+                            message: `You have not added product list`,
                             context: {
-                                key: `not_found`
+                                key: 'not_found'
                             }
                         })
                     }
@@ -149,6 +123,7 @@ class productsCtrl {
             })
         })
     }
+
 
 }
 

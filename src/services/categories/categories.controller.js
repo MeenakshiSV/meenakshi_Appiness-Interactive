@@ -46,35 +46,6 @@ class categoriesCtrl {
         })
     }
 
-    list(body) {
-        return new Promise((resolve, reject) => {
-            categoriesModel.find({}, (err, results) => {
-                if(err) {
-                    console.log(err)
-                    reject(commonError.internal_server)
-                } else {
-                    if(results) {
-                        resolve({
-                            status: status.success,
-                            message: `Categories list`,
-                            body: {
-                                categories: results
-                            }
-                        })
-
-                    } else {
-                        reject({
-                            status: status.not_found,
-                            message: `You have not added category liat`,
-                            context: {
-                                key: 'not_found'
-                            }
-                        })
-                    }
-                }
-            })
-        })
-    }
 
     remove(body) {
         return new Promise((resolve, reject) => {
@@ -161,6 +132,37 @@ class categoriesCtrl {
                             message: `Product does not exist!`,
                             context: {
                                 key: `not_found`
+                            }
+                        })
+                    }
+                }
+            })
+        })
+    }
+
+    
+    list(body) {
+        return new Promise((resolve, reject) => {
+            categoriesModel.find({}, (err, results) => {
+                if(err) {
+                    console.log(err)
+                    reject(commonError.internal_server)
+                } else {
+                    if(results) {
+                        resolve({
+                            status: status.success,
+                            message: `Categories list`,
+                            body: {
+                                categories: results
+                            }
+                        })
+
+                    } else {
+                        reject({
+                            status: status.not_found,
+                            message: `You have not added category liat`,
+                            context: {
+                                key: 'not_found'
                             }
                         })
                     }
