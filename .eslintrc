@@ -1,0 +1,11 @@
+{
+    "parser": "babel-eslint",
+    "rules": {
+      "strict": 0,
+      "indent": ["error", 4, { "SwitchCase": 1 }],
+      "semi": 0
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    }
+  }
